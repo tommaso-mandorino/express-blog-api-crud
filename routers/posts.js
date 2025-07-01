@@ -86,9 +86,24 @@ router.patch('/:id', (request, response) => {
 router.delete('/:id', (request, response) => {
 
     // Get ID parameter
-    const id = request.params.id;
+    const parameterID = request.params.id;
 
-    response.send(`Eliminazione del post con ID: ${id}`);
+    // response.send(`Eliminazione del post con ID: ${id}`);
+
+    // Capture post by its ID
+    const post = idExists(parameterID, posts);
+
+    // Get post index in the objects array
+    const postIndex = posts.indexOf(post);
+
+    // Delete post with specified ID from objects array
+    posts.splice(postIndex, 1);
+
+    // Log all remaining posts
+    console.log(posts);
+
+    // Send no content response
+    response.sendStatus(204);
 
 });
 

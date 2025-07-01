@@ -21,9 +21,23 @@ router.get('/', (request, response) => {
 router.get('/:id', (request, response) => {
 
     // Get ID parameter
-    const id = request.params.id;
+    const parameterID = request.params.id;
 
-    response.send(`Post con ID: ${id}`);
+    // response.send(`Post con ID: ${id}`);
+
+    // Capture post by its ID
+    const post = posts.find(post => {
+
+        // Get current post ID casted to string, so this method works both if ID is a string or a number
+        currentPostID = String(post.id);
+
+        // Return this post if IDs are identical
+        return currentPostID === parameterID;
+
+    });
+
+    // Send post as JSON
+    response.json(post);
 
 });
 

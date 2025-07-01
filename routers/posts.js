@@ -7,6 +7,28 @@ const express = require('express');
 // Router creation
 const router = express.Router();
 
+/**
+ * 
+ * @param {string} id The ID to search in the objects array
+ * @param {Array<object>} objectsArray Objects array where to search for specified ID
+ * @returns {object | undefined} Object with specified ID | undefined if ID is not found
+ */
+function idExists(id, objectsArray) {
+
+    const findResult = objectsArray.find(object => {
+
+        // Get current object ID casted to string, so this method works both if ID is a string or a number
+        const currentObjectID = String(object.id);
+
+        // Return this object if IDs are identical
+        return currentObjectID === id;
+
+    });
+
+    return findResult;
+
+}
+
 // Index
 router.get('/', (request, response) => {
 
@@ -26,15 +48,7 @@ router.get('/:id', (request, response) => {
     // response.send(`Post con ID: ${id}`);
 
     // Capture post by its ID
-    const post = posts.find(post => {
-
-        // Get current post ID casted to string, so this method works both if ID is a string or a number
-        currentPostID = String(post.id);
-
-        // Return this post if IDs are identical
-        return currentPostID === parameterID;
-
-    });
+    const post = idExists(parameterID, posts);
 
     // Send post as JSON
     response.json(post);

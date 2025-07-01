@@ -10,7 +10,10 @@ const router = express.Router();
 // Index
 router.get('/', (request, response) => {
 
-    response.send('Lista di tutti i post.');
+    // response.send('Lista di tutti i post.');
+
+    // Send all posts as JSON
+    response.json(posts);
 
 });
 

@@ -34,6 +34,21 @@ router.get('/', (request, response) => {
 
     // response.send('Lista di tutti i post.');
 
+    // Get tag query sting
+    const tagQueryString = request.query.tag;
+
+    // IF tag query sting is present
+    if (request.query.tag) {
+
+        // Filter posts by it
+        const filteredPosts = posts.filter(post => post.tags.includes(tagQueryString));
+
+        // Send filtered posts as JSON
+        response.json(filteredPosts);
+
+        return;
+    }
+
     // Send all posts as JSON
     response.json(posts);
 

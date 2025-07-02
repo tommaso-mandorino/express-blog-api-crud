@@ -1,7 +1,7 @@
 # Express Blog API CRUD
 (esercizio)
 
-## Passaggi
+## Passaggi giorno 1
 
 1. Creare una cartella 'data' in cui creare un file che contenga ed esporti l’array di posts.
 
@@ -26,3 +26,17 @@
     1. All’interno, prepariamo tutte le funzioni necessarie e copiamo in ciascuna, la logica delle funzioni che attualmente si trovano nel router.
 
     2. Nel file delle rotte importiamo le funzioni dichiarate nel controller e le associamo alle varie rotte.
+
+## Passaggi giorno 2
+
+1. Impostiamo il body-parser per far sì che la nostra app riesca a decifrare il request body.
+
+2. All’interno della rotta Store, stampiamo nel terminale i dati in arrivo, grazie a un console.log.
+
+3. Implementiamo quindi la logica per aggiungere un nuovo post al nostro blog, e prepariamo la risposta adeguata.
+
+4. Ripetiamo il procedimento per la rotta di Update, in modo da avere la possibilità di modificare le nostre risorse.
+
+## Bonus
+
+1. In Update, controllare se il parametro si riferisce ad un post esistente e, in caso contrario, rispondere con uno stato 404 e un messaggio d’errore in formato JSON.

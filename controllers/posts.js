@@ -128,7 +128,7 @@ function store(request, response) {
     // Set response status to 201 (created)
     response.status(201);
     
-    // Send response containing the new post as JSON object
+    // Send response containing the new post as JSON
     response.json(newPost);
 
 };
@@ -137,9 +137,35 @@ function store(request, response) {
 function update(request, response) {
 
     // Get ID parameter
-    const id = request.params.id;
+    const parameterID = request.params.id;
 
-    response.send(`Modifica totale del post con ID: ${id}`);
+    // Get request body
+    const requestBodyPost = request.body;
+
+    // Capture post by its ID
+    const post = postExists(parameterID, posts, response);
+
+    // IF post was not found
+    if (!post) {
+
+        return;
+
+    }
+
+    // Update title
+    post.title = requestBodyPost.title;
+
+    // Update content
+    post.content = requestBodyPost.content;
+
+    // Update image
+    post.image = requestBodyPost.image;
+
+    // Update tags
+    post.tags = requestBodyPost.tags;
+
+    // Return updated post as JSON
+    response.json(post);
 
 }
 

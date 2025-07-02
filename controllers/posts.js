@@ -91,7 +91,14 @@ function show(request, response) {
 
 // Store
 function store(request, response) {
+    
+    // Get request body
+    const newPost = request.body;
 
+    console.log('\nÈ arrivato un nuovo post:\n');
+    
+    console.log(newPost);
+    
     response.send('Aggiunta di un nuovo post');
 
 };

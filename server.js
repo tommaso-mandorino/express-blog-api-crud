@@ -13,11 +13,11 @@ const server = express();
 // Static assets use
 server.use(express.static('public'));
 
-// Posts router use
-server.use('/posts', postsRouter);
-
 // JSON body parser use
 server.use(express.json());
+
+// Posts router use
+server.use('/posts', postsRouter);
 
 // Root route
 server.get('/', (request, response) => {

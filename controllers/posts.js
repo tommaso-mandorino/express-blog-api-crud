@@ -152,6 +152,7 @@ function update(request, response) {
 
     }
 
+
     // Update title
     post.title = requestBodyPost.title;
 

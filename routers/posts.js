@@ -8,12 +8,13 @@ const express = require('express');
 const router = express.Router();
 
 /**
- * 
+ * Check if a post with specified ID exists
  * @param {string} id The ID to search in the objects array
  * @param {Array<object>} objectsArray Objects array where to search for specified ID
- * @returns {object | undefined} Object with specified ID | undefined if ID is not found
+ * @param {object} responseObject Response object which will return 404 code and message to client if post is not found
+ * @returns {object | flase} Object with specified ID | false if ID is not found
  */
-function idExists(id, objectsArray) {
+function postExists(id, objectsArray, responseObject) {
 
     const findResult = objectsArray.find(object => {
 
@@ -24,6 +25,23 @@ function idExists(id, objectsArray) {
         return currentObjectID === id;
 
     });
+
+    // IF post with specified ID was not found
+    if (!findResult) {
+
+        // Return JSON with error details
+        responseObject.status(404).json(
+            {
+                error: true,
+                errorCode: 404,
+                errorString: 'Not found',
+                message: `Post with ID ${id} not found.`
+            }
+        );
+
+        return false;
+
+    }
 
     return findResult;
 
@@ -63,7 +81,14 @@ router.get('/:id', (request, response) => {
     // response.send(`Post con ID: ${id}`);
 
     // Capture post by its ID
-    const post = idExists(parameterID, posts);
+    const post = postExists(parameterID, posts, response);
+
+    // IF post was not found
+    if (!post) {
+
+        return;
+
+    }
 
     // Send post as JSON
     response.json(post);
@@ -106,13 +131,22 @@ router.delete('/:id', (request, response) => {
     // response.send(`Eliminazione del post con ID: ${id}`);
 
     // Capture post by its ID
-    const post = idExists(parameterID, posts);
+    const post = postExists(parameterID, posts, response);
+
+    // IF post was not found
+    if (!post) {
+
+        return;
+
+    }
 
     // Get post index in the objects array
     const postIndex = posts.indexOf(post);
 
     // Delete post with specified ID from objects array
     posts.splice(postIndex, 1);
+
+    console.log('\n-------------------\n| Remaining posts |\n-------------------\n');
 
     // Log all remaining posts
     console.log(posts);

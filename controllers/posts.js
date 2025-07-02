@@ -93,13 +93,43 @@ function show(request, response) {
 function store(request, response) {
     
     // Get request body
-    const newPost = request.body;
+    const requestBodyPost = request.body;
 
-    console.log('\nÈ arrivato un nuovo post:\n');
+    // console.log('\nÈ arrivato un nuovo post:');
     
-    console.log(newPost);
+    // console.log(requestBodyPost);
+
+    // Get posts number
+    const postsNumber = posts.length;
+
+    // Get last post index
+    const lastPostIndex = postsNumber - 1;
+
+    // Get last post item
+    const lastPostItem = posts[lastPostIndex];
+
+    // Get last post ID
+    const lastPostID = lastPostItem.id;
+
+    // Create a new ID for the new post increasing the last one
+    const newID = lastPostID + 1;
+
+    const newPost = {
+        id: newID,
+        title: requestBodyPost.title,
+        content: requestBodyPost.content,
+        image: requestBodyPost.image,
+        tags: requestBodyPost.tags
+    }
+
+    // Push new post into posts
+    posts.push(newPost);
     
-    response.send('Aggiunta di un nuovo post');
+    // Set response status to 201 (created)
+    response.status(201);
+    
+    // Send response containing the new post as JSON object
+    response.json(newPost);
 
 };
 

@@ -39,4 +39,10 @@
 
 ## Bonus
 
-1. In Update, controllare se il parametro si riferisce ad un post esistente e, in caso contrario, rispondere con uno stato 404 e un messaggio d’errore in formato JSON.
+In Update, controllare se il parametro si riferisce ad un post esistente e, in caso contrario, rispondere con uno stato 404 e un messaggio d’errore in formato JSON.
+
+## Passaggi giorno 3
+
+1. Inserire un middleware per la gestione delle rotte non registrate, che interverrà in caso di endpoint inesistente, rispondendo con un messaggio e uno status appropriato.
+
+2. Inserire un middleware per la gestione degli errori, che interverrà in caso di errore, rispondendo con un messaggio e uno status appropriato.
